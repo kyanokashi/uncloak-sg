@@ -51,7 +51,7 @@ pub mod ch5 {
         let mut threads = vec![];
 
         for j in 0..5 {
-            let mutex_clone = Arc::clone(&mutex);
+            let mutex_clone = mutex.clone();
 
             let t = thread::spawn(move || {
                 loop {
@@ -69,8 +69,7 @@ pub mod ch5 {
                     match res {
                         Some(x) => {
                             if input != x {
-                                println!("Thread {}: {:?} \n{}, {}", j, hash, input, x);
-                                //println!("{}, {}", input, x);
+                                println!("Thread {}: ({}, {}) {:?}", j, input, x, hash);
                                 break;
                             }
                         }
