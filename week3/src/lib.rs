@@ -55,14 +55,10 @@ pub mod ch5 {
 
             let t = thread::spawn(move || {
                 loop {
-                    let i: u32 = rand::thread_rng().gen();
-
-                    let input = format!("{}", i);
-
+                    let input = format!("{}", rand::thread_rng().gen::<u32>());
                     let hash = sha_512_n(&input, n);
 
                     let mut m = mutex_clone.lock().unwrap();
-
                     let res = m.insert(hash.clone(), input.clone());
                     drop(m);
 
